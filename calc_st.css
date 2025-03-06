@@ -23,6 +23,10 @@
   background-color: #E9ECEF; 
   cursor: pointer;
   color: #333;
+  box-shadow: 5px 5px 2px #333;
+}
+.position_phon:hover {
+  background: #CCC;
 }
 /*корпус калькулятора*/
 .korpus {
@@ -31,7 +35,26 @@
   background-color: rgb(243, 247, 250);
   padding: 20px;
   border-radius: 20px;
+  box-shadow: 10px 10px 5px #333;
 }
+/* кнопка гитхаба */
+.github_button {
+  position: absolute;
+  top: 265px;
+  left: 350px;
+  width: 80px;                 
+  height: 50px;                
+  border-radius: 8px;          
+  border: none;                
+  background-color: #E9ECEF; 
+  cursor: pointer;
+  color: #333;
+  box-shadow: 5px 5px 2px #333;
+}
+.github_button:hover {
+  background: #CCC;
+}
+
 /*ЛР выполнил*/
 .nadpis { 
   color: #333;
@@ -100,7 +123,4 @@
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 8px;
 }
-
-
-
   
