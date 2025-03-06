@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <title>калькулятор</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- указываем, что файл style.css содержит таблицу стилей (stylesheet) -->
+    <link rel="stylesheet" href="calc_st.css"> 
+    <!-- <script type="text/javascript" src="calc_mechaniks.js"></script> -->
+  </head>
+
+<body class="main">
+  <div class="korpus"> <!-- div - это базовый html-контейнер, который может содержать в себе другие html-элементы. -->
+    <!-- блок с экраном калькулятора, где будет выводиться результат вычислений. -->
+    <div id="result" class="result">
+      0
+    </div>
+
+    <!-- блок с кнопками калькулятора. -->
+    <div>
+      <!--горизонтальный ряд из четырех кнопок-->
+      <div>  
+        <button id="btn_op_clear" class="my-btn secondary">C</button>
+        <button id="btn_op_sign" class="my-btn secondary">+/-</button>
+        <button id="btn_op_percent" class="my-btn secondary">%</button>
+        <button id="btn_op_clear" class="my-btn secondary">/</button>
+      </div>
+
+      <div>
+        <button id="btn_digit_7" class="my-btn">7</button>
+        <button id="btn_digit_8" class="my-btn">8</button>
+        <button id="btn_digit_9" class="my-btn">9</button>
+        <button id="btn_op_mult" class="my-btn primary">x</button>
+      </div>
+
+      <div>
+        <button id="btn_digit_4" class="my-btn">4</button>
+        <button id="btn_digit_5" class="my-btn">5</button>
+        <button id="btn_digit_6" class="my-btn">6</button>
+        <button id="btn_op_minus" class="my-btn primary">-</button>
+      </div>
+
+      <div>
+        <button id="btn_digit_1" class="my-btn">1</button>
+        <button id="btn_digit_2" class="my-btn">2</button>
+        <button id="btn_digit_3" class="my-btn">3</button>
+        <button id="btn_op_plus" class="my-btn primary">+</button>
+      </div>
+
+      <div>
+        <button id="btn_digit_0" class="my-btn">0</button>
+        <button id="btn_digit_." class="my-btn">.</button>
+        <button id="btn_op_equal" class="my-btn primary execute">=</button>
+      </div>
+      
+    </div>
+    <br>
+    <br>
+    <details> 
+      <summary class="nadpis">ЛР выполнил</summary>
+        студент группы РТ5-41Б <br> Фешин Дмитрий
+    </details>
+    <br>
+    <p>
+      Цель данной лабораторной работы - <mark style="background-color: #09F;">знакомство</mark> с инструментами построения пользовательских интерфейсов web-сайтов: <mark style="background-color: #09F;">HTML</mark>, <mark style="background-color: #09F;">CSS</mark>. В ходе выполнения работы, вам предстоит ознакомиться с кодом реализации простого калькулятора, и затем выполнить задания по варианту.
+    </p>
+    <a href="https://github.com/Dmitriy1249/XML_Feshin-D.-RT5-41B" target="_blank">
+      <button class="github_button">github.com</button>
+    </a>
+    <br>
+    <button class="position_phon" onclick="changeBackground()">Сменить фон</button>
+  </div>
+</body>
+<script>
+  const colors = ["#FFDDC1", "#C1FFD7", "#C1D8FF", "#FFC1E3", "#E3C1FF"];
+  const images = ["dlyacalc.jpg"];
+  let currentIndex = 0;
+
+  function changeBackground() {
+    const body = document.body
+    if (currentIndex < colors.length) {
+        body.style.backgroundColor = colors[currentIndex];
+        body.style.backgroundImage = "none"; // Убираем изображение, если есть
+    } else {
+        body.style.backgroundImage = `url(${images[currentIndex - colors.length]})`;
+        body.style.backgroundColor = "transparent"; // Убираем цвет, если есть
+    }
+    currentIndex = (currentIndex + 1) % (colors.length + images.length);
+  }
+</script>
+</html>
