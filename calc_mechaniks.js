@@ -61,6 +61,23 @@ window.onload = function(){
         expressionResult = ''
         outputElement.innerHTML = 0
     }
+
+    // кнопка изменения знака (+/-)
+    document.getElementById("btn_op_sign").onclick = function() { 
+        if (!selectedOperation) {
+            // Меняем знак числа a
+            if (a !== '') {
+                a = (-parseFloat(a)).toString();
+                outputElement.innerHTML = a;
+            }
+        } else {
+            // Меняем знак числа b
+            if (b !== '') {
+                b = (-parseFloat(b)).toString();
+                outputElement.innerHTML = b;
+            }
+        }
+    }
     
     // кнопка расчёта результата
     document.getElementById("btn_op_equal").onclick = function() { 
@@ -80,6 +97,7 @@ window.onload = function(){
             case '/':
                 expressionResult = (+a) / (+b)
                 break;
+
         }
         
         a = expressionResult.toString()
@@ -88,4 +106,27 @@ window.onload = function(){
     
         outputElement.innerHTML = a
     }
+
+    // Кнопка вычисления геометрической прогрессии
+    document.getElementById("btn_op_percent").onclick = function() {
+        const a1 = parseFloat(prompt("Введите первый член прогрессии (a1):"));
+        const q = parseFloat(prompt("Введите знаменатель прогрессии (q):"));
+        const n = parseInt(prompt("Введите количество членов прогрессии (n):"));
+
+        if (isNaN(a1) || isNaN(q) || isNaN(n) || n <= 0) {
+            alert("Некорректные данные. Пожалуйста, введите числа.");
+            return;
+        }
+
+        let sum;
+        if (q === 1) {
+            sum = a1 * n;
+        } else {
+            sum = a1 * (Math.pow(q, n) - 1) / (q - 1);
+        }
+
+        outputElement.innerHTML = sum.toFixed(2);
+    }
+
+
     };
