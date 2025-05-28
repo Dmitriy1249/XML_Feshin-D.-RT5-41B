@@ -7,7 +7,7 @@ export class BackButtonComponent {
     render() {
         const button = document.createElement('button');
         button.className = 'btn btn-secondary mb-4';
-        button.innerHTML = '← Назад к продуктам';
+        button.innerHTML = '← Назад';
         button.addEventListener('click', this.onClick);
         this.parent.appendChild(button);
     }
