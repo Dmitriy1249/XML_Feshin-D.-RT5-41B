@@ -54,7 +54,7 @@ export class StocksController { // controller - один(единственны�
     return this.stocksService.updateDescription(+id, +index, newDescription);
   }
 
-  @Delete(':id/description/:index') // DELETE localhost:3000/1/description/2 BODY
+  @Delete(':id/description/:index') // DELETE localhost:3000/1/description/2
   deleteDescription(@Param('id') id: string, @Param('index') index: string) {
     return this.stocksService.deleteDescription(+id, +index);
   }
