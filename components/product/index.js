@@ -1,10 +1,24 @@
+import {ajax} from "../../modules/ajax.js";
+import {stockUrls} from "../../modules/stockUrls.js";
+
 export class ProductComponent {
-    constructor(parent, product) {
+    constructor(parent, id) {
         this.parent = parent;
-        this.product = product;
+        this.id = id;
+        this.product;
     }
 
-    render() {
+    getData() { // тут мы будем с бэка получать карточки (по id)
+        ajax.get(stockUrls.getStockById(this.id), (data) => {
+            this.renderData(data);
+        });
+    }
+
+    renderData(data) {
+        this.product = data;
+
+        if (!this.product) return;
+
         this.parent.innerHTML = `
             <div class="card mb-3">
                 <div class="row g-0">
@@ -19,12 +33,19 @@ export class ProductComponent {
                             <p class="text-muted">${this.product.text}</p>
                             <div class="mt-4">
                                 <h4>Описание:</h4>
-                                <p class="card-text">${this.product.description}</p>
+                                <ul class="card-text">
+                                    ${this.product.description.map(line => `<li>${line}</li>`).join('')}
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         `;
+    }
+
+    render() {
+        this.parent.innerHTML = '';
+        this.getData();
     }
 }
