@@ -1,9 +1,12 @@
 {
-  "name": "lab_3",
+  "name": "lab_6",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
@@ -11,5 +14,8 @@
   "description": "",
   "dependencies": {
     "bootstrap": "^5.3.6"
+  },
+  "devDependencies": {
+    "vite": "^7.1.4"
   }
 }

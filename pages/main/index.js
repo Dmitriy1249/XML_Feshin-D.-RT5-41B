@@ -1,7 +1,7 @@
 import { ProductCardComponent } from "../../components/product-card/index.js";
 import { ProductPage } from "../product/index.js";
 import { SumOfSquaresComponent } from "../../components/sum-of-squares/index.js";
-import {ajax} from "../../modules/ajax.js";
+import * as api from '../../modules/api.js'; 
 import {stockUrls} from "../../modules/stockUrls.js";
 import {AddProductPage} from "../add-page/index.js";
 
@@ -10,11 +10,15 @@ export class MainPage {
         this.parent = parent;
     }
 
-    getData() { // тут мы будем с бэка получать карточки (все)
-        ajax.get(stockUrls.getStocks(), (data) => {
+    async getData() { // тут мы будем с бэка получать карточки (все)
+        try {
+            const data = await api.get(stockUrls.getStocks());
             this.renderData(data);
-            // здесь на самом деле не сама функция, а адрес 00000x43
-        });
+        } catch (e) {
+            const container = document.getElementById('products-container');
+            container.innerHTML = `<div>НЕТ КАРТОЧЕК</div>`;
+            console.error("ащибка", e);
+        }
     }
 
   renderData(items) {
@@ -71,20 +75,28 @@ export class MainPage {
         new ProductPage(this.parent, product.id).render();
     }
 
-    copyProduct(product) {
+    async copyProduct(product) {
+        try {
         const newProduct = {
             ...product,
             title: `${product.title} (копия)`,
         };
         delete newProduct.id;
-        ajax.post(stockUrls.createStock(), newProduct, () => this.getData());
-        // (аргументы, которые принимаем) => { то, что мы делаем }
-        // function название(аргументы, которые принимаем) {
-        //     то, что мы делаем
-        // }
+        await api.post(stockUrls.createStock(), newProduct);
+        this.getData();
+        } catch(err){
+            this.parent.innerHTML = `<div>ащибка</div>`;
+            console.error(err);
+        }
     }
 
-    deleteProduct(id) {
-        ajax.delete(stockUrls.removeStockById(id), () => this.getData());
+    async deleteProduct(id) {
+        try {
+            await api.del(stockUrls.getStockById(id));
+            this.getData();
+        } catch(err){
+            this.parent.innerHTML = `<div>ащибка</div>`;
+            console.error(err);
+        }
     }
 }

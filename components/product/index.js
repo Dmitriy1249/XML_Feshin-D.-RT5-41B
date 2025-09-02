@@ -1,5 +1,5 @@
-import {ajax} from "../../modules/ajax.js";
 import {stockUrls} from "../../modules/stockUrls.js";
+import * as api from "../../modules/api.js";
 
 export class ProductComponent {
     constructor(parent, id) {
@@ -8,10 +8,16 @@ export class ProductComponent {
         this.product;
     }
 
-    getData() { // тут мы будем с бэка получать карточки (по id)
-        ajax.get(stockUrls.getStockById(this.id), (data) => {
-            this.renderData(data);
-        });
+    async getData() { // тут мы будем с бэка получать карточки (по id)
+        try {
+        const data = await api.get(stockUrls.getStockById(this.id));
+        this.renderData(data);
+        } catch(err) {
+            this.parent.innerHTML = `
+            <div>ащибка</div>
+            `;
+            console.error(err);
+        }
     }
 
     renderData(data) {

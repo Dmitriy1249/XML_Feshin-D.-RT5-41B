@@ -1,7 +1,7 @@
-import {ajax} from "../../modules/ajax.js";
 import {stockUrls} from "../../modules/stockUrls.js";
 import { MainPage } from "../main/index.js";
 import {ProductPage} from "../product/index.js";
+import * as api from "../../modules/api.js";
 
 export class EditDescriptionPage{
     constructor(parent, id){
@@ -10,10 +10,14 @@ export class EditDescriptionPage{
         this.product;
     }
 
-    getData() {
-        ajax.get(stockUrls.getStockById(this.id), (product) => {
-            this.renderData(product);
-        })
+    async getData() {
+        try {
+            const data = await api.get(stockUrls.getStockById(this.id));
+            this.renderData(data);
+        } catch(err){
+            this.parent.innerHTML = `<div>ащибка</div>`;
+            console.error(err);
+        }
     }
 
     renderData(data) {
@@ -55,29 +59,42 @@ export class EditDescriptionPage{
         const cancelBtn = document.getElementById("cancel-btn");
 
         saveBtn.forEach(btn => {
-            btn.addEventListener("click", (event) => {
-                const index = event.currentTarget.dataset.index; // узнали индекс кнопки, которую нажали
-                const input = document.querySelector(`input[name="description-${index}"]`); // взяли тот инпут, которому принадлежит кнопка
-                const newValue = input.value;
-                ajax.patch(stockUrls.updateDescriptionByIndex(this.id, index), {newDescription: newValue}, () => {
+            btn.addEventListener("click", async (event) => {
+                try {
+                    const index = event.currentTarget.dataset.index; // узнали индекс кнопки, которую нажали
+                    const input = document.querySelector(`input[name="description-${index}"]`); // взяли тот инпут, которому принадлежит кнопка
+                    const newValue = input.value;
+
+                    await api.patch(stockUrls.deleteDescriptionByIndex(this.id, index), {newDescription: newValue});
                     this.getData();
-                })
+                } catch(err){
+                    this.parent.innerHTML = `<div>ащибка</div>`;
+                    console.error(err);
+                }
             })
         })
 
         deleteBtn.forEach(btn => {
-            btn.addEventListener("click", (event) => {
-                const index = event.currentTarget.dataset.index;
-                ajax.delete(stockUrls.deleteDescriptionByIndex(this.id, index), () => {
+            btn.addEventListener("click", async (event) => {
+                try {
+                    const index = event.currentTarget.dataset.index;
+                    await api.del(stockUrls.deleteDescriptionByIndex(this.id, index));
                     this.getData();
-                })
+                } catch(err) {
+                    this.parent.innerHTML = `<div>ащибка</div>`;
+                    console.error(err);
+                }
             })
         })
 
-        addBtn.addEventListener("click", () => {
-            ajax.patch(stockUrls.addDescriptionById(this.id), { newDescription: "Новое поле"}, () => {
+        addBtn.addEventListener("click", async () => {
+            try {
+                await api.patch(stockUrls.addDescriptionById(this.id), {newDescription: "Новая строка"});
                 this.getData();
-            })
+            } catch(err) {
+                this.parent.innerHTML = `<div>ащибка</div>`;
+                console.error(err);
+            }
         })
 
         cancelBtn.addEventListener("click", () => {
