@@ -17,7 +17,7 @@ export class MainPage {
         } catch (e) {
             const container = document.getElementById('products-container');
             container.innerHTML = `<div>НЕТ КАРТОЧЕК</div>`;
-            console.error("ащибка", e);
+            console.error("ошибка", e);
         }
     }
 
@@ -85,7 +85,7 @@ export class MainPage {
         await api.post(stockUrls.createStock(), newProduct);
         this.getData();
         } catch(err){
-            this.parent.innerHTML = `<div>ащибка</div>`;
+            this.parent.innerHTML = `<div>ошибка</div>`;
             console.error(err);
         }
     }
@@ -95,7 +95,7 @@ export class MainPage {
             await api.del(stockUrls.getStockById(id));
             this.getData();
         } catch(err){
-            this.parent.innerHTML = `<div>ащибка</div>`;
+            this.parent.innerHTML = `<div>ошибка</div>`;
             console.error(err);
         }
     }

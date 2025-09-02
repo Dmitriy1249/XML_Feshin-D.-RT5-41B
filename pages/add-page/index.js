@@ -55,7 +55,7 @@ export class AddProductPage {
         new MainPage(this.parent).render();
       }catch(err){
         this.parent.innerHTML = `
-        <div>ащибка</div>
+        <div>ошибка</div>
         `; 
         console.error(err);
       }

@@ -15,7 +15,7 @@ export class EditDescriptionPage{
             const data = await api.get(stockUrls.getStockById(this.id));
             this.renderData(data);
         } catch(err){
-            this.parent.innerHTML = `<div>ащибка</div>`;
+            this.parent.innerHTML = `<div>ошибка</div>`;
             console.error(err);
         }
     }
@@ -68,7 +68,7 @@ export class EditDescriptionPage{
                     await api.patch(stockUrls.deleteDescriptionByIndex(this.id, index), {newDescription: newValue});
                     this.getData();
                 } catch(err){
-                    this.parent.innerHTML = `<div>ащибка</div>`;
+                    this.parent.innerHTML = `<div>ошибка</div>`;
                     console.error(err);
                 }
             })
@@ -81,7 +81,7 @@ export class EditDescriptionPage{
                     await api.del(stockUrls.deleteDescriptionByIndex(this.id, index));
                     this.getData();
                 } catch(err) {
-                    this.parent.innerHTML = `<div>ащибка</div>`;
+                    this.parent.innerHTML = `<div>ошибка</div>`;
                     console.error(err);
                 }
             })
@@ -92,7 +92,7 @@ export class EditDescriptionPage{
                 await api.patch(stockUrls.addDescriptionById(this.id), {newDescription: "Новая строка"});
                 this.getData();
             } catch(err) {
-                this.parent.innerHTML = `<div>ащибка</div>`;
+                this.parent.innerHTML = `<div>ошибка</div>`;
                 console.error(err);
             }
         })

@@ -15,7 +15,7 @@ export class EditProductPage{
           const data = await api.get(stockUrls.getStockById(this.id));
           this.renderData(data);
         } catch(err){
-          this.parent.innerHTML = `<div>ащибка</div>`;
+          this.parent.innerHTML = `<div>ошибка</div>`;
           console.error(err);
         }
     }
@@ -73,7 +73,7 @@ export class EditProductPage{
             await api.patch(stockUrls.updateStockById(this.id), product);
             new ProductPage(this.parent, product.id).render();
           } catch(err){
-            this.parent.innerHTML = `<div>ащибка</div>`;
+            this.parent.innerHTML = `<div>ошибка</div>`;
             console.error(err);
           }
         })
