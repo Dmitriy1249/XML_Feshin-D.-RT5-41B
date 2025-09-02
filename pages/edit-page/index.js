@@ -1,7 +1,7 @@
+import {ajax} from "../../modules/ajax.js";
 import {stockUrls} from "../../modules/stockUrls.js";
 import { MainPage } from "../main/index.js";
 import {ProductPage} from "../product/index.js";
-import * as api from "../../modules/api.js";
 
 export class EditProductPage{
     constructor(parent, id){
@@ -10,14 +10,10 @@ export class EditProductPage{
         this.product;
     }
 
-    async getData() {
-        try {
-          const data = await api.get(stockUrls.getStockById(this.id));
-          this.renderData(data);
-        } catch(err){
-          this.parent.innerHTML = `<div>ащибка</div>`;
-          console.error(err);
-        }
+    getData() {
+        ajax.get(stockUrls.getStockById(this.id), (product) => {
+            this.renderData(product);
+        })
     }
 
     renderData(data) {
@@ -56,26 +52,21 @@ export class EditProductPage{
       </div>
     `;
 
-      this.addEvents();
+    this.addEvents();
     }
 
     addEvents() {
         const form = document.getElementById("edit-product-form");
         const cancelBtn = document.getElementById("cancel-btn");
-        form.addEventListener("submit", async (event) => {
-          try {
+        form.addEventListener("submit", (event) => {
             event.preventDefault();
             const formData = new FormData(form);
             const product = Object.fromEntries(formData.entries());
             product.description = product.description.split('\n').map(s => s.trim()).filter(s => s.length);
             product.id = this.id;
-
-            await api.patch(stockUrls.updateStockById(this.id), product);
-            new ProductPage(this.parent, product.id).render();
-          } catch(err){
-            this.parent.innerHTML = `<div>ащибка</div>`;
-            console.error(err);
-          }
+            ajax.patch(stockUrls.updateStockById(this.id), product, () => {
+                new ProductPage(this.parent, product.id).render()
+            })
         })
         cancelBtn.addEventListener("click", () => {
             new ProductPage(this.parent, this.product.id).render();
