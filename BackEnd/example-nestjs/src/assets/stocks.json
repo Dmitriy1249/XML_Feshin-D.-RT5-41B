@@ -1,49 +1,48 @@
-[            {
-                "id": 1,
-                "src": "https://avatars.mds.yandex.net/i?id=2ee2c2c1afeb06ac3d644d0a8a6777d956dea938-12472731-images-thumbs&n=13",
-                "title": "ВТБ Накопительный счет",
-                "text": "Высокие проценты",
-                "description": ["Доступ к пополнению счета и снятии денежных средств до 99%",
-                        "отличный вклад"]
-            },
-            {
-                "id": 2,
-                "src": "https://sberex.ru/wp-content/uploads/2019/05/pasted.jpg",
-                "title": "Кредитная карта ВТБ",
-                "text": "Льготный период",
-                "description": [
-             "В каждом городе России",
-             "Даже в Саратове!"
-        ]
-            },
-            {
-                "id": 3,
-                "src": "https://shareholder-guide.vtb.ru/images/share/logo-ru.jpg",
-                "title": "ВТБ",
-                "text": "Лучший банк страны",
-                "description": [
-                    "Подходит для всех слоев населения",
-                    "Особенно для вас!"
-                ]
-            },
-            {
-                "id": 4,
-                "src": "https://avatars.mds.yandex.net/i?id=848c27e16857aab3b38dd44bf2215977_l-5277049-images-thumbs&n=13",
-                "title": "шалаш",
-                "text": "Лучшее место для консультаций",
-                "description": [
-                    "В каждом городе России",
-                    "Даже в Саратове!"
-                ]
-            },
-            {
-                "id": 5,
-                "src": "https://avatars.mds.yandex.net/i?id=7533def7ad75a500a7bd51f865c75c79_l-7010604-images-thumbs&n=13",
-                "title": "ВТБ Дебетовая карта",
-                "text": "Кэшбэк 5%",
-                "description": [
-                    "Возврат денег за покупки в выбранных категориях",
-                    "Очень выгодные условия!"
-                ]
-            }
-        ]
+[
+  {
+    "id": 1,
+    "src": "https://avatars.mds.yandex.net/i?id=2ee2c2c1afeb06ac3d644d0a8a6777d956dea938-12472731-images-thumbs&n=13",
+    "modelSrc": "/models/vtb1.glb",
+    "title": "ВТБ Накопительный счет",
+    "text": "Высокие проценты",
+    "description": [
+      "Доступ к пополнению счета и снятии денежных средств до 99%",
+      "отличный вклад"
+    ]
+  },
+  {
+    "id": 2,
+    "src": "https://sberex.ru/wp-content/uploads/2019/05/pasted.jpg",
+    "modelSrc": "/models/vtb2.glb",
+    "title": "Кредитная карта ВТБ",
+    "text": "Льготный период",
+    "description": ["В каждом городе России", "Даже в Саратове!"]
+  },
+  {
+    "id": 3,
+    "src": "https://shareholder-guide.vtb.ru/images/share/logo-ru.jpg",
+    "modelSrc": "/models/vtb3.glb",
+    "title": "ВТБ",
+    "text": "Лучший банк страны",
+    "description": ["Подходит для всех слоев населения", "Особенно для вас!"]
+  },
+  {
+    "id": 4,
+    "src": "https://avatars.mds.yandex.net/i?id=848c27e16857aab3b38dd44bf2215977_l-5277049-images-thumbs&n=13",
+    "modelSrc": "/models/vtb5.glb",
+    "title": "шалаш",
+    "text": "Лучшее место для консультаций",
+    "description": ["В каждом городе России", "Даже в Саратове!"]
+  },
+  {
+    "id": 5,
+    "src": "https://avatars.mds.yandex.net/i?id=7533def7ad75a500a7bd51f865c75c79_l-7010604-images-thumbs&n=13",
+    "modelSrc": "/models/vtb4.glb",
+    "title": "ВТБ Дебетовая карта",
+    "text": "Кэшбэк 5%",
+    "description": [
+      "Возврат денег за покупки в выбранных категориях",
+      "Очень выгодные условия!"
+    ]
+  }
+]

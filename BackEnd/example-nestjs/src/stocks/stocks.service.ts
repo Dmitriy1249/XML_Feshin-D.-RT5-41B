@@ -9,10 +9,11 @@ export class StocksService {
 
   constructor(private fileService: FileService<Stock[]>) {}
 
-  create(createStockDto: CreateStockDto) {
+  create(createStockDto: CreateStockDto) : Object {
     const stocks = this.fileService.read();
     const stock = { ...createStockDto, id: stocks.length + 1 };
     this.fileService.add(stock);
+    return { result: "okay" };
   }
   /*
   BODY: {
@@ -58,7 +59,7 @@ export class StocksService {
     return stocks.find((stock) => id === stock.id) ?? null;
   }
 
-  update(id: number, updateStockDto: UpdateStockDto) : void {
+  update(id: number, updateStockDto: UpdateStockDto) : Object {
     const stocks = this.fileService.read(); // Stock[]
     // const stock = stocks.find((stock) => id === stock.id);
     // const updatedStock = {...stock, ...updateStockDto};
@@ -75,14 +76,16 @@ export class StocksService {
       };
     })
     this.fileService.write(updatedStocks);
+    return { result: "okay" };
   }
 
-  remove(id: number) : void {
+  remove(id: number) : Object {
     const stocks = this.fileService.read().filter((stock) => id !== stock.id);
     this.fileService.write(stocks);
+    return { result: "okay" };
   }
 
-  addDescription(id: number, newDescription : string) : void {
+  addDescription(id: number, newDescription : string) : Object | void {
     const stocks = this.fileService.read();
     const stock = stocks.find((stock) => stock.id === id) ?? null; // та что будем править
     if (!stock) return;
@@ -92,9 +95,10 @@ export class StocksService {
 
     const updatedStocks = stocks.map((stock) => stock.id === id ? { ...stock, description: curDescriptionArray} : stock);
     this.fileService.write(updatedStocks);
+    return { result: "okay" };
   } 
 
-  updateDescription(id : number, index : number, newDescription : string) : void {
+  updateDescription(id : number, index : number, newDescription : string) : Object | void {
     const stocks = this.fileService.read();
     const stock = stocks.find((stock) => stock.id === id) ?? null; // та что будем править
     if (!stock) return;
@@ -106,9 +110,10 @@ export class StocksService {
 
     const updatedStocks = stocks.map((stock) => stock.id === id ? { ...stock, description: curDescriptionArray} : stock);
     this.fileService.write(updatedStocks);
+    return { result: "okay" };
   }
 
-  deleteDescription(id : number, index : number) : void {
+  deleteDescription(id : number, index : number) : Object | void {
     const stocks = this.fileService.read();
     const stock = stocks.find((stock) => stock.id === id) ?? null; // та что будем править
     if (!stock) return;
@@ -120,5 +125,6 @@ export class StocksService {
 
     const updatedStocks = stocks.map((stock) => stock.id === id ? { ...stock, description: curDescriptionArray} : stock);
     this.fileService.write(updatedStocks);
+    return { result: "okay" };
   }
 }
