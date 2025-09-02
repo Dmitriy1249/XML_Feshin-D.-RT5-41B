@@ -1,0 +1,57 @@
+import {stockUrls} from "../../modules/stockUrls.js";
+import * as api from "../../modules/api.js";
+
+export class ProductComponent {
+    constructor(parent, id) {
+        this.parent = parent;
+        this.id = id;
+        this.product;
+    }
+
+    async getData() { // тут мы будем с бэка получать карточки (по id)
+        try {
+        const data = await api.get(stockUrls.getStockById(this.id));
+        this.renderData(data);
+        } catch(err) {
+            this.parent.innerHTML = `
+            <div>ащибка</div>
+            `;
+            console.error(err);
+        }
+    }
+
+    renderData(data) {
+        this.product = data;
+
+        if (!this.product) return;
+
+        this.parent.innerHTML = `
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="${this.product.src}" class="img-fluid rounded-start"
+                             alt="${this.product.title}" style="max-height: 500px; object-fit: cover;"
+                             onerror="this.src='https://via.placeholder.com/600x400?text=Нет+изображения'">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h2 class="card-title">${this.product.title}</h2>
+                            <p class="text-muted">${this.product.text}</p>
+                            <div class="mt-4">
+                                <h4>Описание:</h4>
+                                <ul class="card-text">
+                                    ${this.product.description.map(line => `<li>${line}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    render() {
+        this.parent.innerHTML = '';
+        this.getData();
+    }
+}
